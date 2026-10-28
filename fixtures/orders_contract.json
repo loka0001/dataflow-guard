@@ -1,0 +1,59 @@
+{
+  "name": "ecommerce_orders",
+  "version": "1.0.0",
+  "description": "Enterprise contract for retail e-commerce customer transaction stream",
+  "primary_key": ["order_id"],
+  "max_quarantine_rate": 0.35,
+  "columns": [
+    {
+      "name": "order_id",
+      "data_type": "str",
+      "nullable": false,
+      "regex_pattern": "^ORD-\\d{5}$",
+      "description": "Unique standardized order identifier"
+    },
+    {
+      "name": "customer_id",
+      "data_type": "str",
+      "nullable": false,
+      "description": "Customer account foreign key"
+    },
+    {
+      "name": "order_date",
+      "data_type": "str",
+      "nullable": false,
+      "description": "ISO timestamp of transaction"
+    },
+    {
+      "name": "order_amount",
+      "data_type": "float",
+      "nullable": false,
+      "min_value": 0.01,
+      "max_value": 50000.0,
+      "description": "Total monetary order value in USD"
+    },
+    {
+      "name": "item_count",
+      "data_type": "int",
+      "nullable": false,
+      "min_value": 1,
+      "max_value": 100,
+      "description": "Quantity of line items in order"
+    },
+    {
+      "name": "status",
+      "data_type": "str",
+      "nullable": false,
+      "allowed_values": ["PENDING", "COMPLETED", "SHIPPED", "CANCELLED", "REFUNDED"],
+      "description": "Lifecycle state of fulfillment"
+    },
+    {
+      "name": "discount_pct",
+      "data_type": "float",
+      "nullable": true,
+      "min_value": 0.0,
+      "max_value": 1.0,
+      "description": "Promotional discount ratio"
+    }
+  ]
+}
